@@ -2,7 +2,7 @@ pragma solidity ^ 0.5.0;
 
 contract bookie{
    
-    address payable public  owner;
+    address payable public owner;
     
     uint public minimumBet;
     //uint maxBet;

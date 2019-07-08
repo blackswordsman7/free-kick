@@ -17,7 +17,11 @@
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
-
+var WalletProvider = require("truffle-wallet-provider");
+const Wallet = require('ethereumjs-wallet');
+var ropstenPrivateKey = new Buffer("039F106E5C9DF0A1CD620A9FB8AE0ACC47E8CEA2F497274120A8A357266CEAB0","hex");
+var ropstenWallet = Wallet.fromPrivateKey(ropstenPrivateKey);
+var ropstenProvider = new WalletProvider(ropstenWallet, "ropsten.infura.io/v3/a8f7e49c59964506880e1576e4b04944");
 // const HDWalletProvider = require('truffle-hdwallet-provider');
 // const infuraKey = "fj4jll3k.....";
 //
@@ -42,12 +46,18 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
+    development: {
+     host: "127.0.0.1",     // Localhost (default: none)
+     port: 8545,            // Standard Ethereum port (default: none)
+     network_id: "*",       // Any network (default: none)
+    },
 
+    ropsten: {
+      provider: ropstenProvider,
+      gas: 4600000,
+      network_id: 3
+    }
+  }
     // Another network with more advanced options...
     // advanced: {
       // port: 8777,             // Custom port
@@ -75,16 +85,16 @@ module.exports = {
       // network_id: 2111,   // This network is yours, in the cloud.
       // production: true    // Treats this network as if it was a public net. (default: false)
     // }
-  },
+  
 
   // Set default mocha options here, use special reporters etc.
-  mocha: {
+ // mocha: {
     // timeout: 100000
-  },
+  //},
 
   // Configure your compilers
-  compilers: {
-    solc: {
+  //compilers: {
+   // solc: {
       // version: "0.5.1",    // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
@@ -94,6 +104,6 @@ module.exports = {
       //  },
       //  evmVersion: "byzantium"
       // }
-    }
-  }
-}
+    //}
+ // }
+};
