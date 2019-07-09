@@ -19,7 +19,7 @@
  */
 var WalletProvider = require("truffle-wallet-provider");
 const Wallet = require('ethereumjs-wallet');
-var ropstenPrivateKey = new Buffer("039F106E5C9DF0A1CD620A9FB8AE0ACC47E8CEA2F497274120A8A357266CEAB0","hex");
+var ropstenPrivateKey = new Buffer("Your Pvt Key","hex");
 var ropstenWallet = Wallet.fromPrivateKey(ropstenPrivateKey);
 var ropstenProvider = new WalletProvider(ropstenWallet, "ropsten.infura.io/v3/a8f7e49c59964506880e1576e4b04944");
 // const HDWalletProvider = require('truffle-hdwallet-provider');
