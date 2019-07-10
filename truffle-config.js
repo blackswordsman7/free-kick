@@ -17,16 +17,22 @@
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
+//  var HDWalletProvider = require("truffle-hdwallet-provider");
+//  const MNEMONIC = '';
+
+const HDWalletProvider = require('truffle-hdwallet-provider');
+const fs = require('fs');
+const mnemonic = fs.readFileSync(".secret").toString().trim();
+
+
 var WalletProvider = require("truffle-wallet-provider");
 const Wallet = require('ethereumjs-wallet');
-var ropstenPrivateKey = new Buffer("039F106E5C9DF0A1CD620A9FB8AE0ACC47E8CEA2F497274120A8A357266CEAB0","hex");
+var ropstenPrivateKey = new Buffer("039F106E5C9DF0A1CD620A9FB8AE0ACC47E8CEA2F497274120A8A357266CEAB0", "hex");
 var ropstenWallet = Wallet.fromPrivateKey(ropstenPrivateKey);
-var ropstenProvider = new WalletProvider(ropstenWallet, "ropsten.infura.io/v3/a8f7e49c59964506880e1576e4b04944");
-// const HDWalletProvider = require('truffle-hdwallet-provider');
+var ropstenProvider = new WalletProvider(ropstenWallet, "https://ropsten.infura.io/v3/a8f7e49c59964506880e1576e4b04944");
+
 // const infuraKey = "fj4jll3k.....";
 //
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 module.exports = {
   /**
@@ -53,7 +59,10 @@ module.exports = {
     },
 
     ropsten: {
-      provider: ropstenProvider,
+      provider: function() {
+        return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/v3/a8f7e49c59964506880e1576e4b04944")
+      },
+      //     provider: ropstenProvider,
       gas: 4600000,
       network_id: 3
     }
