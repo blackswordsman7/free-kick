@@ -27,11 +27,7 @@ const mnemonic = fs.readFileSync(".secret").toString().trim();
 
 var WalletProvider = require("truffle-wallet-provider");
 const Wallet = require('ethereumjs-wallet');
-<<<<<<< HEAD
-var ropstenPrivateKey = new Buffer("039F106E5C9DF0A1CD620A9FB8AE0ACC47E8CEA2F497274120A8A357266CEAB0", "hex");
-=======
-var ropstenPrivateKey = new Buffer("Your Pvt Key","hex");
->>>>>>> 78ba9011c53e3ba07c81fbf42771bcd664dcca87
+var ropstenPrivateKey = new Buffer("Your Private Key", "hex");
 var ropstenWallet = Wallet.fromPrivateKey(ropstenPrivateKey);
 var ropstenProvider = new WalletProvider(ropstenWallet, "https://ropsten.infura.io/v3/a8f7e49c59964506880e1576e4b04944");
 
