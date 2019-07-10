@@ -38,14 +38,25 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
+<header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h1 className="App-title">free-kick</h1>
+        </header>
+        <div>
+          Your Sports Bookie<br/>
+        Your Wallet address is {this.state.address}
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        {/*We define a grid*/}
+        <Grid>
+          {/*corresponding to class="row"*/}
+          <Row>
+            {/* we define the two columns. The bootstrap grid is divided by 12
+            parts so if we want two columns, they will take 6 parts each */}
+            <Col xs={6} sm={6}>A {/*We will import Team A component here */}</Col>
+            <Col xs={6} sm={6}>B {/*We will import Team B component here */}</Col>
+          </Row>
+        </Grid>
+</div>
     );
   }
 }
