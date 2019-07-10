@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {Grid,Row,Col} from 'react-bootstrap';
 import getWeb3 from './utils/getWeb3.js';
-import bookieContract from './build/contracts/bookie.json'
+import bookieContract from './contracts/bookie.json'
 import './App.css';
 
 
 
-class TeamB extends Component {
+class TeamA extends Component {
   constructor(){
     super();
     this.state={
@@ -34,6 +34,7 @@ class TeamB extends Component {
       });
       return results.web3
     }).then(results => {
+      console.log("bonjour")
       this.getAmount(results)
     }).catch( () => {
       //If no web3 provider was found, log it in the console
@@ -44,7 +45,6 @@ class TeamB extends Component {
 
 
   getAmount(web3){
-    //Get the contract
     const contract = require('truffle-contract');
     const bookie = contract(bookieContract);
     bookie.setProvider(web3.currentProvider);
@@ -52,15 +52,14 @@ class TeamB extends Component {
     web3.eth.getAccounts((error, accounts) => {
     bookie.deployed().then((instance) => {
 
-      //Instanciate the contract in a promise
+      //Instanciation du contrat
       bookieInstance = instance
 
     }).then((result) => {
-      //Calling the AmountOne function of the smart-contract
-      return bookieInstance.AmountTwo.call({from: accounts[0]})
+      // On récupère ensuite la valeur du contrat
+      // et on appelle la fonction BuyFirst avec ses paramètres.
+      return bookieInstance.AmountOne.call({from: accounts[0]})
     }).then((result) => {
-      //Then the value returned is stored in the Amount state var.
-      //Divided by 10000 to convert in ether.
       this.setState({
         Amount : result.c / 10000
       })
@@ -82,7 +81,7 @@ class TeamB extends Component {
           bookieInstance = instance
         }).then((result) => {
           // Get the value from the contract to prove it worked.
-          return bookieInstance.bet(2, {from: accounts[0],
+          return bookieInstance.bet(1, {from: accounts[0],
           value: this.state.InputAmount})
         }).catch(() => {
           console.log("Error with bookie")
@@ -99,7 +98,7 @@ class TeamB extends Component {
         bookie.deployed().then((instance) => {
           bookieInstance = instance
         }).then((result) => {
-          return bookieInstance.distributePrizes(2, {from: accounts[0]})
+          return bookieInstance.distributePrizes(1, {from: accounts[0]})
         }).catch(() => {
           console.log("Error with distributing prizes")
         })
@@ -112,7 +111,7 @@ class TeamB extends Component {
   render(){
         return(
           <div>
-            <h3>Team B</h3>
+            <h3>Team A</h3>
             <h4> Total amount : {this.state.Amount} ETH</h4>
             <hr/>
             <h5> Enter an amount to bet</h5>
@@ -134,4 +133,4 @@ class TeamB extends Component {
 
 }
 
-export default TeamB;
+export default TeamA;
